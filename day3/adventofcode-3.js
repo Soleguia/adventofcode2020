@@ -336,25 +336,19 @@ function resolve(input){
 function route(input, right, down){
     let rowNum  = 0;
     let colNum  = 0;
-    let row     = []
     let trees   = 0;
     do {
-        colNum += right; // 3 derecha
-        rowNum += down; // 1 abajo
+        let row = [...input[rowNum]]; // array de la fila
         
-        row = [...input[rowNum]]; // array de la fila
-
-        let spot = colNum;
-
-        if(colNum > row.length){ // si la posición a la derecha es mayor de la extensión actual
-            spot = colNum % row.length
-        }
-
+        let spot = colNum % row.length
+        
         if(row[spot] === '#'){
             trees++;
         }
+        colNum += right; // 3 derecha
+        rowNum += down; // 1 abajo
 
-    } while(rowNum < input.length-1)
+    } while(rowNum < input.length)
     return trees;
 }
 
@@ -364,8 +358,6 @@ function resolve2(input){
     let route51 =  route(input, 5, 1);
     let route71 =  route(input, 7, 1);
     let route12 =  route(input, 1, 2);
-    console.log({route11, route31, route51, route71, route12})
-    console.log({route11, route31, route51, route71, route12})
     return route11 * route31 * route51 * route71 * route12;
 }
 
@@ -377,4 +369,4 @@ console.log(output) // 187
 
 const output2 = resolve2(input);
 
-console.log(output2) // 428
+console.log(output2) // 4723283400
